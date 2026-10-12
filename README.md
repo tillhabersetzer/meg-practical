@@ -79,7 +79,7 @@ analysis/
 ```
 
 #### Requirements & Setup
-The analysis scripts require the [FieldTrip toolbox](https://www.fieldtriptoolbox.org/faq/matlab/installation/) to be installed. Once downloaded, you can add it to your MATLAB path using the provided `startup.m` script (be sure to adjust the toolbox path inside the script).
+The analysis scripts require the [FieldTrip toolbox to be installed](https://www.fieldtriptoolbox.org/faq/matlab/installation/). Once downloaded, you can add it to your MATLAB path using the provided `startup.m` script (be sure to adjust the toolbox path inside the script).
 
 To make the pipeline work, the `settings_analysis.m` file must be updated with your local directory paths. Specifically, you need to set the paths to the FieldTrip toolbox and the main project directory. For example:
 
