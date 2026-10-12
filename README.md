@@ -13,6 +13,7 @@ The repository is organized as follows. Folders shown in brackets `[...]` are re
 ```text
 practical_meg/
 ├── 📂 analysis/        # MATLAB/FieldTrip scripts for analyzing the MEG data
+├── 📂 derivatives/      # Derived experimental results
 ├── 📂 experiments/     # Scripts to run the auditory stimulus presentation paradigms
 ├── [📂 fieldtrip/]     # Excluded: The FieldTrip toolbox (must be added manually)
 ├── [📂 rawdata/]       # Excluded: Recorded subject MEG datasets (e.g., .fif files)
@@ -99,6 +100,8 @@ settings.path2project   = fullfile('M:\practical_meg');
 | `apply_maxfilter_parallel.py` | Executes parallelized Maxwell filtering (SSS/tSSS) on BIDS-formatted MEG data. It automatically detects bad channels, computes continuous head positions (cHPI) and applies movement compensation to suppress external noise. |
 | `check_maxfilter_stats.py` | Analyzes and visualizes head movement statistics (pitch, yaw, roll and translation) extracted from the maxfiltered recordings, generating group-level distributions and subject-level scatter plots. |
 | `plot_trafo.py` | A visualization utility module that generates 3D plots of head position transformations (rotation and translation) between different coordinate spaces. |
+
+All computed analysis results for the subjects will be saved in the `derivatives` folder, located in the main project directory alongside `rawdata`. Currently, this folder contains only the fine calibration and cross-talk files required for Maxwell filtering.
 
 #### Sensor Level Analysis (📂 sensorlevel)
 
