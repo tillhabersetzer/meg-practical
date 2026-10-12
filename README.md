@@ -78,6 +78,11 @@ analysis/
 └── 📄 startup.m            # Script to initialize FieldTrip and local paths
 ```
 
+| Script Name | Description |
+| :--- | :--- |
+| `settings_analysis.m` | Configuration file that defines core project paths (data and derivatives directories) and sets pipeline parameters such as trigger IDs, epoch windows, filter frequencies and processing flags like latency correction. |
+| `startup.m` | Initialization script that adds the FieldTrip toolbox to the environment and executes FieldTrip's default setup. |
+
 #### Requirements & Setup
 The analysis scripts require the [FieldTrip toolbox to be installed](https://www.fieldtriptoolbox.org/faq/matlab/installation/). Once downloaded, you can add it to your MATLAB path using the provided `startup.m` script (be sure to adjust the toolbox path inside the script).
 
@@ -87,5 +92,44 @@ To make the pipeline work, the `settings_analysis.m` file must be updated with y
 settings.path2fieldtrip = fullfile('M:\practical_meg\fieldtrip');
 settings.path2project   = fullfile('M:\practical_meg');
 ```
-#### Maxilter
-the AMxfilter directory contains the follwoung script: 
+#### Maxwell Filtering (📂 maxfilter)
+
+| Script Name | Description |
+| :--- | :--- |
+| `apply_maxfilter_parallel.py` | Executes parallelized Maxwell filtering (SSS/tSSS) on BIDS-formatted MEG data. It automatically detects bad channels, computes continuous head positions (cHPI) and applies movement compensation to suppress external noise. |
+| `check_maxfilter_stats.py` | Analyzes and visualizes head movement statistics (pitch, yaw, roll and translation) extracted from the maxfiltered recordings, generating group-level distributions and subject-level scatter plots. |
+| `plot_trafo.py` | A visualization utility module that generates 3D plots of head position transformations (rotation and translation) between different coordinate spaces. |
+
+#### Sensor Level Analysis (📂 sensorlevel)
+
+| Script Name | Description |
+| :--- | :--- |
+| `compute_erfs.m` | A pipeline for cleaning MEG data and computing MLAEFs. It performs epoch definition with audio-delay latency correction, filtering, semi-automated visual artifact rejection and condition pooling to output averaged waveform data. |
+| `plot_erfs.m` | A script for visualizing task-related MLAEF responses at the sensor level. It generates multi-sensor topographic array plots, single-channel waveform responses and spatial scalp topography distributions averaged over specific time windows. |
+
+#### Source Level Analysis (📂 sourcelevel)
+
+#### Source Level Analysis
+
+```text
+sourcelevel/
+├── 📂 dipolefitting/      # MATLAB scripts for equivalent current dipole (ECD) fitting
+└── 📂 forward_modelling/  # MATLAB scripts for MRI coregistration and head model generation
+```
+
+##### 📂 dipolefitting
+
+| Script Name | Description |
+| :--- | :--- |
+| `check_diploc.m` | A utility function that evaluates the spatial locations of a 2-dipole fit to accurately map them to the left and right hemispheres. |
+| `constrained_dipolfitting.m` | Computes scalar dipole moments for two dipoles using specified locations and orientations. It calculates the orientations using either a timecourse mean or Singular Value Decomposition (SVD) before solving the linear equation. |
+| `dipolefitting.m` | An automated Equivalent Current Dipole (ECD) fitting pipeline that models auditory evoked fields. It establishes spatial starting points via a symmetric grid search, refines the fit non-linearly without symmetry constraints and reconstructs source time courses. |
+| `plot_dipolfitting_subjectlevel.m` | A visualization script that overlays estimated dipole locations onto the subject's structural MRI slices and maps the coordinates into standard MNI space using the AAL atlas. It generates time-series figures comparing source waveforms across different orientation strategies. |
+
+##### 📂 forward_modelling
+
+| Script Name | Description |
+| :--- | :--- |
+| `check_coregistration.m` | A quality control script used to visually inspect the coregistration between the MEG sensor space, digitized headshape and structural MRI space. It generates diagnostic figures that overlay MEG sensors with the headmodel and plots the MRI anatomy alongside brain and scalp segmentations. |
+| `headmodel.m` | Processes structural MRI and MEG digitization data to compute a singleshell volume conduction headmodel. It performs interactive fiducial alignment and automatic Iterative Closest Point (ICP) headshape fitting, reslices the coregistered MRI to a 1mm isotropic resolution and segments the MRI. |
+| `volumetric_sourcemodel.m` | Generates subject-specific volumetric source spaces for spatial filtering and dipole fitting. The script loads a standard MNI template grid and applies non-linear spatial warping to project the grid into the subject's native anatomical space based on their segmented MRI. |
