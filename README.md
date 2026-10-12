@@ -12,12 +12,12 @@ The repository is organized as follows. Folders shown in brackets `[...]` are re
 
 ```text
 practical_meg/
-├── 📂 analysis/        # MATLAB/FieldTrip scripts for analyzing the MEG data
-├── 📂 derivatives/      # Derived experimental results
-├── 📂 experiments/     # Scripts to run the auditory stimulus presentation paradigms
-├── [📂 fieldtrip/]     # Excluded: The FieldTrip toolbox (must be added manually)
-├── [📂 rawdata/]       # Excluded: Recorded subject MEG datasets (e.g., .fif files)
-└── 📄 experiment.pdf   # The main instruction manual and theoretical background
+├── 📂 analysis/                # MATLAB/FieldTrip scripts for analyzing the MEG data
+├── 📂 derivatives/             # Derived experimental results
+├── 📂 experiments/             # Scripts to run the auditory stimulus presentation paradigms
+├── [📂 fieldtrip/]             # Excluded: The FieldTrip toolbox (must be added manually)
+├── [📂 rawdata/]               # Excluded: Recorded subject MEG datasets (e.g., .fif files)
+└── 📄 MEG_Practical_Manual.pdf # The main instruction manual and theoretical background
 ```
 
 ### Excluded Dependencies
@@ -25,7 +25,7 @@ To fully execute the analysis pipeline, you must download the [FieldTrip toolbox
 
 ## Experiments
 
-Please read the `experiment.pdf` manual for comprehensive details regarding the experimental paradigm and analysis pipeline. A brief overview of the experimental setup is provided below.
+Please read the `MEG_Practical_Manual.pdf` manual for comprehensive details regarding the experimental paradigm and analysis pipeline. A brief overview of the experimental setup is provided below.
 
 This folder contains two experimental paradigms implemented as MATLAB Apps. Because these are auditory experiments, they require both [MATLAB](https://www.mathworks.com/) and an installed version of [SoundmexPro](https://www.soundmexpro.de/) for low-latency audio playback.
 
