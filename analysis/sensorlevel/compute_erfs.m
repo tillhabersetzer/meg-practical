@@ -35,18 +35,19 @@ cd(current_dir)
 %--------------------------------------------------------------------------
 
 % Select subjects for processing
-subjects = [1,2,3];
+subjects = [1,2];
 n_subj   = length(subjects);
 
 tasks        = {'click','up','down'};
 n_tasks      = length(tasks);
-conditions   = [tasks,{'pooled'}]; % pooled conditions is added
-n_conditions = length(condtitions);
+conditions   = [tasks, {'pooled'}]; % pooled conditions is added
+n_conditions = length(conditions);
 
 % Event Values
 eventvalues       = struct;
 eventvalues.click = settings.trig_id.click;
 eventvalues.up    = settings.trig_id.up;
+eventvalues.down  = settings.trig_id.down;
 
 % Filter settings
 bpfreq  = settings.bpfreq;
@@ -64,8 +65,8 @@ apply_latency_correction = settings.apply_latency_correction;
 audio_latency            = settings.audio_latency;
 
 % Reject bad epochs with semi-automatic artifact rejection
-% apply_epoch_rejection = settings.apply_epoch_rejection;
-apply_epoch_rejection = true;
+apply_epoch_rejection = settings.apply_epoch_rejection;
+% apply_epoch_rejection = true;
 
 %% Preprocess data
 %--------------------------------------------------------------------------
@@ -73,9 +74,9 @@ apply_epoch_rejection = true;
 for sub_idx = 1:n_subj % loop over subjects
 
     subject    = sprintf('sub-%02d', subjects(sub_idx));
-    epochs_all = cell(1,n_conditions); % + pooled condition
-    avgs       = cell(1,n_conditions);
-    n_trials   = zeros(1,n_conditions);
+    epochs_all = cell(1, n_conditions + 1); % pooled condition
+    avgs       = cell(1, n_conditions + 1);
+    n_trials   = zeros(1, n_conditions + 1);
 
     for tsk_idx = 1:n_tasks % loop over tasks
 
@@ -193,7 +194,7 @@ for sub_idx = 1:n_subj % loop over subjects
         epochs_pooled         = ft_appenddata(cfg, epochs_all{idx(1)}, epochs_all{idx(2)});
         epochs_pooled.grad    = epochs_all{idx(1)}.grad;  
         n_trials(n_tasks+1)   = length(epochs_pooled.trial);
-        epochs_all{n_tasks+1} = epochs_pooled;
+        % epochs_all{n_tasks+1} = epochs_pooled;
         
         cfg             = [];
         avgs{n_tasks+1} = ft_timelockanalysis(cfg, epochs_pooled);
@@ -212,7 +213,7 @@ for sub_idx = 1:n_subj % loop over subjects
 
     results            = struct();
     results.avgs       = avgs;
-    % results.epochs     = epochs_all;
+    % results.epochs     = epochs_all; % not necessary
     results.n_trials   = n_trials;
     results.conditions = conditions;
     save(fullfile(dir2save,[subject,'_erfs.mat']),'-struct','results',"-v7.3"); 

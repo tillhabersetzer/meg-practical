@@ -171,7 +171,7 @@ idxs(1,:) = 1:3; % left
 idxs(2,:) = 4:6; % right
 
 figidxs = [1,3,5;2,4,6];
-name    = {'(left)','(right)'};
+name    = {'left','right'};
 
 % Get overall min/max values
 min_vals = cellfun(@(s) min(s.dip.mom, [], 'all'), source_vec);
@@ -185,7 +185,7 @@ for i=1:2
     figidx = figidxs(i,:);
     
     time2plot = source_vec{tsk_idx}.time*1000;
-    axisvec   = horzcat(time2plot,[mini,maxi]);
+    axisvec   = horzcat([min(time2plot), max(time2plot)],[mini,maxi]);
     
     % Loop over tasks
     for tsk_idx = 1:n_tasks
@@ -231,7 +231,7 @@ for i=1:2
     idx = idxs(mapping(i));
 
     time2plot = source_vec{1}.time*1000;
-    axisvec   = horzcat(time2plot,[mini,maxi]);
+    axisvec   = horzcat([min(time2plot), max(time2plot)],[mini,maxi]);
     
     subplot(2,1,i); 
     hold on
@@ -273,7 +273,7 @@ figure('Name',sprintf('%s: Fixed oriented dipole via mean orientation',subject))
 for i=1:2
 
     idx     = mapping(i);
-    axisvec = horzcat(time2plot,[mini,maxi]);
+    axisvec = horzcat([min(time2plot), max(time2plot)],[mini,maxi]);
     
     subplot(2,1,i); 
     hold on
@@ -302,7 +302,7 @@ sgtitle(sprintf('%s: Fixed oriented dipole via mean orientation',subject))
 
 % Mapping between dipole locations and hemispheres
 %-------------------------------------------------
-pos     = dippos_nosym{ep_idx};
+pos     = dippos_nosym;
 mapping = check_diploc(pos); 
 
 idxs      = [];
@@ -360,6 +360,7 @@ for i=1:2
         xlabel('t / ms')
     end
     ylabel('dipole moment / nAm')
+    legend(tasks);
     hold off;
 
 end
@@ -387,7 +388,7 @@ figure('Name',sprintf('%s: Fixed oriented dipole via svd orientation',subject))
 for i=1:2
 
     idx     = mapping(i);
-    axisvec = horzcat(time2plot,[mini,maxi]);
+    axisvec = horzcat([min(time2plot), max(time2plot)],[mini,maxi]);
     
     subplot(2,1,i); 
     hold on

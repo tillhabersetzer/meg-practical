@@ -125,14 +125,14 @@ ft_plot_headshape(headshape, 'vertexcolor', 'k');
 
 %% figure 6, MRI and anatomical landmarks
 % seems not to work :/
-figure
-for i=1:3
-  subplot(2,2,i)
-  figure
-  title(headshape.fid.label{i});
-  location = headshape.fid.pos(i,:);
-  ft_plot_ortho(mri.anatomy, 'transform', mri.transform, 'style', 'intersect', 'location', location, 'plotmarker', location, 'markersize', 5, 'markercolor', 'y')
-end
+% figure
+% for i=1:3
+%   subplot(2,2,i)
+%   figure
+%   title(headshape.fid.label{i});
+%   location = headshape.fid.pos(i,:);
+%   ft_plot_ortho(mri.anatomy, 'transform', mri.transform, 'style', 'intersect', 'location', location, 'plotmarker', location, 'markersize', 5, 'markercolor', 'y')
+% end
 
 %% figure 7, MRI scalp surface and anatomical landmarks
 

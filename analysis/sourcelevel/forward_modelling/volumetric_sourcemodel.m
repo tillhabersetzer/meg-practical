@@ -40,7 +40,7 @@ use_maxfilter = settings.use_maxfilter;
 
 % choose subject number
 %--------------------------------------------------------------------------
-subjects = [1,2,3];
+subjects = [1,2];
 % Use task that has been used as a reference head position
 task = 'click';
 

@@ -39,7 +39,7 @@ cd(current_dir)
 
 %% Script settings
 %--------------------------------------------------------------------------
-subjects = [1,2,3];
+subjects = [1,2];
 n_subj   = length(subjects);
 
 % Switch between erf-types
@@ -212,9 +212,9 @@ for sub_idx = 1:n_subj % loop over subjects
     cfg           = [];
     cfg.headmodel = headmodel;
     cfg.channel   = chantype;     
-    cfg.dippos    = source_pooled_nosym{ep_idx}.dip.pos;
-    cfg.dipmom    = source_pooled_nosym{ep_idx}.dip.mom;
-    cfg.diptime   = source_pooled_nosym{ep_idx}.time;
+    cfg.dippos    = source_pooled_nosym.dip.pos;
+    cfg.dipmom    = source_pooled_nosym.dip.mom;
+    cfg.diptime   = source_pooled_nosym.time;
     cfg.unit      = sourcemodel.unit;
     cfg.ori       = 'svd';
     cfg.timewin   = timewin;

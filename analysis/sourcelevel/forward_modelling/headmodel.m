@@ -42,7 +42,7 @@ use_maxfilter = settings.use_maxfilter;
 
 % choose subject number
 %--------------------------------------------------------------------------
-sub_idx = 3;
+sub_idx = 2;
 subject = sprintf('sub-%02d', sub_idx);
 
 % Use task that has been used as a reference head position

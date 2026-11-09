@@ -34,7 +34,7 @@ cd(current_dir)
 %% Script settings
 %--------------------------------------------------------------------------
 % Choose subject for plotting
-subject = 'sub-02'; % 'sub-02'
+subject = 'sub-01'; % 'sub-02'
 
 %% Load data
 %--------------------------------------------------------------------------
@@ -127,7 +127,7 @@ channel2plot = 'meg_cmb';
 % Select conditions for plotting
 con_idx = (contains(conditions,'click') | contains(conditions,'down'))  | contains(conditions,'up');
 % con_idx = contains(conditions,'pooled');
-n_cond2plot = length(con_idx);
+n_cond2plot = sum(con_idx);
 
 switch channel2plot 
     case 'megmag'
